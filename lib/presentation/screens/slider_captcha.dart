@@ -8,8 +8,10 @@ class SliderCaptcha extends StatelessWidget {
   const SliderCaptcha(
       {required this.image,
       required this.onSuccess,
-      this.title = 'Trượt để xác thực',
+      required this.onFail,
+      this.title = 'เลื่อนเพื่อยืนยัน',
       this.captchaSize = 30,
+      this.maxWrongNumber = 2,
       Key? key})
       : super(key: key);
 
@@ -17,9 +19,13 @@ class SliderCaptcha extends StatelessWidget {
 
   final void Function() onSuccess;
 
+  final void Function() onFail;
+
   final String title;
 
   final double captchaSize;
+
+  final double maxWrongNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +35,17 @@ class SliderCaptcha extends StatelessWidget {
             context: context,
             height: 200,
             sizeCaptcha: captchaSize,
-            onSuccess: onSuccess),
+            maxWrongNumber: maxWrongNumber,
+            onSuccess: onSuccess,
+            onFail: onFail),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
                 height: 200,
                 child: SliderPanel(sizeCaptcha: captchaSize, image: image)),
+            const SizedBox(height: 8),
             SliderBar(title: title),
           ],
         ),

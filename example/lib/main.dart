@@ -42,8 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
         body: const SizedBox());
   }
 
-  void showMyDialog(BuildContext context) {
-    showDialog(
+  void showMyDialog(BuildContext context, String message) async {
+    await showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -53,12 +53,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             content: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text('Xác thực thành công'),
+              children: [
+                Text(message),
               ],
             ),
           );
         });
+    Navigator.of(context).pop();
   }
 
   void showCaptcha(BuildContext context) {
@@ -69,11 +70,16 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SliderCaptcha(
-                image: Image.asset(
-                  'assets/image.jpeg',
+                title: 'เลื่อนเพื่อยืนยัน',
+                captchaSize: 36,
+                image: Image.network(
+                  'https://res.theconcert.com/w_500,c_thumb/4d57f4ad43560027ca23bd434980ca635/fd7b51a2-49d8-4d14-afe9-0a9def2868d6.jpg',
                   fit: BoxFit.fitWidth,
                 ),
-                onSuccess: () => showMyDialog(context),
+                onSuccess: () => showMyDialog(context, 'สำเร็จ'),
+                onFail: () {
+                  showMyDialog(context, 'ไม่สำเร็จ');
+                },
               ),
             ),
           );

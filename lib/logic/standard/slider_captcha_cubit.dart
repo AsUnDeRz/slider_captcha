@@ -9,16 +9,21 @@ part 'slider_captcha_state.dart';
 
 ///
 class SliderCaptchaCubit extends Cubit<SliderCaptchaState> {
-  SliderCaptchaCubit({
-    required this.context,
-    required this.onSuccess,
-    required this.height,
-    this.sizeCaptcha = 50,
-  }) : super(const SliderCaptchaLoading()) {
+  SliderCaptchaCubit(
+      {required this.context,
+      required this.onSuccess,
+      required this.onFail,
+      required this.height,
+      this.sizeCaptcha = 50,
+      this.maxWrongNumber = 2})
+      : super(const SliderCaptchaLoading()) {
     _load(context);
   }
 
   final BuildContext context;
+
+  ///@Description: when done right captcha, will performance this action
+  final Function() onFail;
 
   ///@Description: when done right captcha, will performance this action
   final Function() onSuccess;
@@ -29,6 +34,10 @@ class SliderCaptchaCubit extends Cubit<SliderCaptchaState> {
   ///@Description: size of icon captcha,
   ///the size captcha not allow to exceed 1/4 height;
   final double sizeCaptcha;
+
+  ///@Description: size of icon captcha,
+  ///the size captcha not allow to exceed 1/4 height;
+  final double maxWrongNumber;
 
   double offsetX = 0;
 
@@ -47,8 +56,9 @@ class SliderCaptchaCubit extends Cubit<SliderCaptchaState> {
     if (dx < offsetX + 5 && dx > offsetX - 5) {
       onSuccess();
     } else {
-      if (wrongNumber == 4) {
+      if (wrongNumber == maxWrongNumber) {
         lockUI();
+        onFail();
         return;
       }
       wrongNumber++;
@@ -80,6 +90,7 @@ class SliderCaptchaCubit extends Cubit<SliderCaptchaState> {
 
   void _resetCaptcha() {
     ///resetWrongNumber
+    _tickerSubscription?.cancel();
     wrongNumber = 0;
     _createUIInfo();
   }
