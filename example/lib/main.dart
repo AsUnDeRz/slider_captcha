@@ -76,9 +76,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   'https://res.theconcert.com/w_500,c_thumb/4d57f4ad43560027ca23bd434980ca635/fd7b51a2-49d8-4d14-afe9-0a9def2868d6.jpg',
                   fit: BoxFit.fitWidth,
                 ),
-                onSuccess: () => showMyDialog(context, 'สำเร็จ'),
-                onFail: () {
-                  showMyDialog(context, 'ไม่สำเร็จ');
+                onSuccess: () async {
+                  debugPrint('สำเร็จ');
+                  await Future.delayed(const Duration(seconds: 3));
+                  Navigator.of(context).pop();
+                },
+                onFail: () async {
+                  debugPrint('ไม่สำเร็จ');
+                  await Future.delayed(const Duration(seconds: 3));
+                  Navigator.of(context).pop();
                 },
               ),
             ),

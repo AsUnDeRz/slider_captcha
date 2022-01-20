@@ -30,3 +30,19 @@ class SliderCaptchaLock extends SliderCaptchaState {
   // TODO: implement props
   List<Object?> get props => [timer];
 }
+
+class SliderCaptchaSuccess extends SliderCaptchaState {
+  const SliderCaptchaSuccess() : super(0);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
+
+class SliderCaptchaFailInLimit extends SliderCaptchaState {
+  const SliderCaptchaFailInLimit() : super(0);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}

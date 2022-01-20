@@ -52,16 +52,20 @@ class SliderCaptchaCubit extends Cubit<SliderCaptchaState> {
     emit(SliderCaptchaMove(dx));
   }
 
-  void check(double dx) {
+  void check(double dx) async {
     if (dx < offsetX + 5 && dx > offsetX - 5) {
       onSuccess();
+      emit(const SliderCaptchaSuccess());
     } else {
       if (wrongNumber == maxWrongNumber) {
-        lockUI();
+        emit(const SliderCaptchaFailInLimit());
+        await Future.delayed(const Duration(milliseconds: 1500));
         onFail();
         return;
       }
       wrongNumber++;
+      emit(const SliderCaptchaFailInLimit());
+      await Future.delayed(const Duration(milliseconds: 1500));
       emit(const SliderCaptchaMove(0));
     }
   }
