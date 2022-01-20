@@ -75,14 +75,8 @@ class SliderCaptcha extends StatelessWidget {
                     children: [
                       SizedBox(
                           height: 200,
-                          child: Scaffold(
-                            backgroundColor: Colors.red,
-                            body: SizedBox(
-                              height: 200,
-                              child: SliderPanel(
-                                  sizeCaptcha: captchaSize, image: image),
-                            ),
-                          )),
+                          child: SliderPanel(
+                              sizeCaptcha: captchaSize, image: image)),
                       const SizedBox(height: 8),
                       SliderBar(title: title)
                     ],
