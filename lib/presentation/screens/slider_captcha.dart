@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_tooltip/simple_tooltip.dart';
 import 'package:slider_captcha/logic/standard/slider_captcha_cubit.dart';
 import 'package:slider_captcha/presentation/widgets/slider_bar.dart';
 import 'package:slider_captcha/presentation/widgets/slider_panel.dart';
