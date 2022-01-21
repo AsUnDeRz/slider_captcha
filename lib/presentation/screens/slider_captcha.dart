@@ -104,7 +104,6 @@ class SliderCaptcha extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       SizedBox(
-                          height: 200,
                           child: SliderPanel(
                               sizeCaptcha: captchaSize, image: image)),
                       const SizedBox(height: 8),
