@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:slider_captcha/presentation/screens/slider_captcha_extention.dart';
 import 'package:slider_captcha/self.dart';
 
 void main() {
@@ -84,6 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 onFail: () async {
                   debugPrint('ไม่สำเร็จ');
                   await Future.delayed(const Duration(seconds: 3));
+                  Navigator.of(context).pop();
+                },
+                onClose: () {
                   Navigator.of(context).pop();
                 },
               ),
